@@ -13,10 +13,15 @@ app.innit = () =>{
 
 app.getCity = () => {
     $("#submitCity").on('click', function(){
+        var errorpage= document.querySelector('.error');
+        errorpage.style.display="none";
+        var infopage= document.querySelector('.start');
+        infopage.style.display="none";
         $(".city").empty();
         $(".temp").empty();
         $(".sky").empty();
         $(".wind").empty();
+        $(".error").empty();
         city= $('#City').val()
         // console.log("You entered: ", city)
         app.getWeather(city);
@@ -31,6 +36,13 @@ app.getWeather = (city) =>{
         dataType: 'json',
     }).then(Result => {
         console.log(Result)
+        console.log(WeatherDescription)
+        var infopage= document.querySelector('.start');
+        infopage.style.display="block";
+        htmlcity=`
+        <h2>Weather for the City of ${Result.name}</h2>
+        `
+        $(".city").append(htmlcity);
         tempC = Result.main.temp - 273.15
         tempC = parseFloat(tempC.toFixed(1));
         tempCFeels = Result.main.feels_like -273.15
@@ -38,29 +50,24 @@ app.getWeather = (city) =>{
         Weather = Result.weather[0].main;
         WeatherDescription = Result.weather[0].description;
         windSpeed = Result.wind.speed;
-        // console.log("Results are: ", Result);
-        console.log(WeatherDescription)
-        if(WeatherDescription == "")
-        {
-            console.log("Error test");
-            var errorpage= document.querySelector('.city');
+        app.recommendations();
+        console.log("works")
+    }).catch(function (err){
+            console.log("Error found");
+            var errorpage= document.querySelector('.error');
             errorpage.style.display="block";
             const htmlerror=`
-            <h2>Error! No City With that Name Found</h2>
+            <h2>Error! No City With that Name Found!</h2>
             `
-            $(".city").append(htmlerror);
-        }
-        else {
+            $(".error").append(htmlerror);
+        })
+        
             
-            var infopage= document.querySelector('.start');
-            infopage.style.display="block";
-            htmlcity=`
-            <h2>Weather for the City of ${Result.name}</h2>
-            `
-            $(".city").append(htmlcity);
-            app.recommendations();
-        }
-    })
+        
+        
+            
+        
+    
 }
 
 app.recommendations = () =>{
@@ -72,8 +79,8 @@ app.recommendations = () =>{
         <img src="./assets/shorts.png" width="60%" height="60%"> 
         
         <p>Shorts and T-Shirt Weather <br>
-        Temperature is ${tempC} <br> 
-        but feels like: ${tempCFeels}<p>
+        Temperature is <b>${tempC}</b> <br> 
+        but feels like: <b>${tempCFeels}</b><p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -83,8 +90,8 @@ app.recommendations = () =>{
         <img src="./assets/tshirt.png" width="60%" height="60%"> 
         
         <p>Pants and T-Shirt Weather <br>
-        Temperature is ${tempC} <br> 
-        but feels like: ${tempCFeels}</p>
+        Temperature is <b>${tempC}</b> <br> 
+        but feels like: <b>${tempCFeels}</b><p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -94,8 +101,8 @@ app.recommendations = () =>{
         <img src="./assets/sweater.png" width="60%" height="60%"> 
         
         <p>Sweater Weather<br>
-        Temperature is ${tempC} <br> 
-        but feels like: ${tempCFeels}</p>
+        Temperature is <b>${tempC}</b> <br> 
+        but feels like: <b>${tempCFeels}</b><p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -105,8 +112,8 @@ app.recommendations = () =>{
         <img src="./assets/coat.png" width="60%" height="60%"> 
         
         <p>Winter Coat Weather<br>
-        Temperature is ${tempC} <br>
-        but feels like: ${tempCFeels}</p>
+        Temperature is <b>${tempC}</b> <br> 
+        but feels like: <b>${tempCFeels}</b><p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -116,8 +123,8 @@ app.recommendations = () =>{
         <img src="./assets/warning.png" width="60%" height="60%"> 
         <div class="freeze">
             <p>Warning! Absoultely Freezing Weather!<br>
-            <Temperature is ${tempC} <br>
-            but feels like: ${tempCFeels}</p>
+            Temperature is <b>${tempC}</b> <br> 
+        but feels like: <b>${tempCFeels}</b><p>
         </div>
         `
         $(".temp").append(htmltempImg);
@@ -128,8 +135,8 @@ app.recommendations = () =>{
         <img src="./assets/warning.png" width="60%" height="60%"> 
         <div class="heat">
             <p>Warning! Heat Stroke Weather!<br>
-            <p>Temperature is ${tempC} <br> 
-            but feels like: ${tempCFeels}</p>
+            Temperature is <b>${tempC}</b> <br> 
+        but feels like: <b>${tempCFeels}</b><p>
         </div>
         `
         $(".temp").append(htmltempImg);
