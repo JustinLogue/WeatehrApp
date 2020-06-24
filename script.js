@@ -18,21 +18,19 @@ app.getCity = () => {
         $(".sky").empty();
         $(".wind").empty();
         city= $('#City').val()
-        console.log("You entered: ", city)
-
+        // console.log("You entered: ", city)
         app.getWeather(city);
-        var infopage= document.querySelector('.start');
-        infopage.style.display="block";
+        
     })
 }
 
 app.getWeather = (city) =>{
     $.ajax({
-        url: 'http://api.openweathermap.org/data/2.5/weather?q=' +city+'&appid=8f8837d6ef6a877cc98b102507a41189',
+        url: 'https://api.openweathermap.org/data/2.5/weather?q=' +city+'&appid=8f8837d6ef6a877cc98b102507a41189',
         method: 'GET',
         dataType: 'json',
     }).then(Result => {
-        console.log("Results are: ", Result);
+        console.log(Result)
         tempC = Result.main.temp - 273.15
         tempC = parseFloat(tempC.toFixed(1));
         tempCFeels = Result.main.feels_like -273.15
@@ -40,11 +38,28 @@ app.getWeather = (city) =>{
         Weather = Result.weather[0].main;
         WeatherDescription = Result.weather[0].description;
         windSpeed = Result.wind.speed;
-        htmlcity=`
-        <h2>Weather for the City of ${Result.name}</h2>
-        `
-        $(".city").append(htmlcity);
-        app.recommendations();
+        // console.log("Results are: ", Result);
+        console.log(WeatherDescription)
+        if(WeatherDescription == "")
+        {
+            console.log("Error test");
+            var errorpage= document.querySelector('.city');
+            errorpage.style.display="block";
+            const htmlerror=`
+            <h2>Error! No City With that Name Found</h2>
+            `
+            $(".city").append(htmlerror);
+        }
+        else {
+            
+            var infopage= document.querySelector('.start');
+            infopage.style.display="block";
+            htmlcity=`
+            <h2>Weather for the City of ${Result.name}</h2>
+            `
+            $(".city").append(htmlcity);
+            app.recommendations();
+        }
     })
 }
 
