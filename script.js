@@ -71,7 +71,9 @@ app.recommendations = () =>{
         {var htmltempImg=`
         <img src="./assets/shorts.png" width="60%" height="60%"> 
         
-        <p>Shorts and T-Shirt Weather</p>
+        <p>Shorts and T-Shirt Weather <br>
+        Temperature is ${tempC} <br> 
+        but feels like: ${tempCFeels}<p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -80,7 +82,9 @@ app.recommendations = () =>{
         {var htmltempImg=`
         <img src="./assets/tshirt.png" width="60%" height="60%"> 
         
-        <p>Pants and T-Shirt Weather</p>
+        <p>Pants and T-Shirt Weather <br>
+        Temperature is ${tempC} <br> 
+        but feels like: ${tempCFeels}</p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -89,7 +93,9 @@ app.recommendations = () =>{
         {var htmltempImg=`
         <img src="./assets/sweater.png" width="60%" height="60%"> 
         
-        <p>Sweater Weather</p>
+        <p>Sweater Weather<br>
+        Temperature is ${tempC} <br> 
+        but feels like: ${tempCFeels}</p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -98,7 +104,9 @@ app.recommendations = () =>{
         {var htmltempImg=`
         <img src="./assets/coat.png" width="60%" height="60%"> 
         
-        <p>Winter Coat Weather</p>
+        <p>Winter Coat Weather<br>
+        Temperature is ${tempC} <br>
+        but feels like: ${tempCFeels}</p>
         `
         $(".temp").append(htmltempImg);
         }
@@ -107,7 +115,9 @@ app.recommendations = () =>{
         {var htmltempImg=`
         <img src="./assets/warning.png" width="60%" height="60%"> 
         <div class="freeze">
-            <p>Warning! Absoultely Freezing Weather!</p>
+            <p>Warning! Absoultely Freezing Weather!<br>
+            <Temperature is ${tempC} <br>
+            but feels like: ${tempCFeels}</p>
         </div>
         `
         $(".temp").append(htmltempImg);
@@ -117,7 +127,9 @@ app.recommendations = () =>{
         {var htmltempImg=`
         <img src="./assets/warning.png" width="60%" height="60%"> 
         <div class="heat">
-            <p>Warning! Heat Stroke Weather!</p>
+            <p>Warning! Heat Stroke Weather!<br>
+            <p>Temperature is ${tempC} <br> 
+            but feels like: ${tempCFeels}</p>
         </div>
         `
         $(".temp").append(htmltempImg);
@@ -125,10 +137,10 @@ app.recommendations = () =>{
     }
 
 
-    var htmlTemp=`
-    <p>Temperature is ${tempC} but feels like: ${tempCFeels}<p>
-    `
-    $(".temp").append(htmlTemp);
+    // var htmlTemp=`
+    // <p>Temperature is ${tempC} <br> but feels like: ${tempCFeels}<p>
+    // `
+    // $(".temp").append(htmlTemp);
 
     
     

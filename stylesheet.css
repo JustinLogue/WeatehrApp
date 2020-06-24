@@ -14,18 +14,22 @@ h1{
 }
 
 .form{
-    margin-left: 25px;
+    margin-left: 32px;
     font-size: 25px;
 }
 
 
 .start{
-    display: none
+    display: none;
+    border: 5px solid black;
+    border-radius: 3%;
+    background-color: #FFFFE0;
+    margin: 25px;
 }
 
 h2{
     font-size: 35px;
-    margin-left: 25px;
+    margin-left: 32px;
 }
 
 p{
@@ -41,9 +45,11 @@ p{
 
 .temp, .sky, .wind{
     margin: 0;
+    
 }
 .temp, .sky, .wind {
-    width: calc(50% - 60px);
+    width: calc(33% - 60px);
+    max-height: auto;
     text-align: center;
     border: 5px outset black;
     margin: 25px;
@@ -73,3 +79,4 @@ p{
 		1px 1px 0 #000;
     
 }
+
