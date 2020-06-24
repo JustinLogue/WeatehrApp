@@ -5,6 +5,7 @@ var tempCFeels = 0;
 var Weather = "";
 var WeatherDescription = "";
 var windSpeed =  0;
+var city = "";
 
 app.innit = () =>{
     app.getWeather();
@@ -24,12 +25,76 @@ app.getWeather = () =>{
         Weather = Result.weather[0].main;
         WeatherDescription = Result.weather[0].description;
         windSpeed = Result.wind.speed;
-        
+        htmlcity=`
+        <h2>Weather for the City of ${Result.name}</h2>
+        `
+        $(".city").append(htmlcity);
         app.recommendations();
     })
 }
 
 app.recommendations = () =>{
+
+    console.log(tempCFeels)
+
+    if (tempCFeels >= 18 && tempCFeels <= 30 ){
+        {var htmltempImg=`
+        <img src="./assets/shorts.png" width="60%" height="60%"> 
+        
+        <p>Shorts and T-Shirt Weather</p>
+        `
+        $(".temp").append(htmltempImg);
+        }
+    }
+    else if (tempCFeels < 18 && tempCFeels >= 10 ){
+        {var htmltempImg=`
+        <img src="./assets/tshirt.png" width="60%" height="60%"> 
+        
+        <p>Pants and T-Shirt Weather</p>
+        `
+        $(".temp").append(htmltempImg);
+        }
+    }
+    else if (tempCFeels < 10 && tempCFeels >= 3 ){
+        {var htmltempImg=`
+        <img src="./assets/sweater.png" width="60%" height="60%"> 
+        
+        <p>Sweater Weather</p>
+        `
+        $(".temp").append(htmltempImg);
+        }
+    }
+    else if (tempCFeels < 3 && tempCFeels >= -20 ){
+        {var htmltempImg=`
+        <img src="./assets/coat.png" width="60%" height="60%"> 
+        
+        <p>Winter Coat Weather</p>
+        `
+        $(".temp").append(htmltempImg);
+        }
+    }
+    else if (tempCFeels < -20 ){
+        {var htmltempImg=`
+        <img src="./assets/warning.png" width="60%" height="60%"> 
+        <div class="freeze>
+            <p>Warning! Absoultely Freezing Weather!</p>
+        </div>
+        `
+        $(".temp").append(htmltempImg);
+        }
+    }
+    else if (tempCFeels > 30 ){
+        {var htmltempImg=`
+        <img src="./assets/warning.png" width="60%" height="60%"> 
+        <div class="heat>
+            <p>Warning! Heat Stroke Weather!</p>
+        </div>
+        `
+        $(".temp").append(htmltempImg);
+        }
+    }
+
+
     var htmlTemp=`
     <p>Temperature is ${tempC} but feels like: ${tempCFeels}<p>
     `
@@ -68,6 +133,16 @@ app.recommendations = () =>{
     <p> Weather is:  ${WeatherDescription}
     `
     $(".sky").append(htmlSky);
+
+    if (windSpeed < 11){
+        {var htmlwindImg=`
+        <img src="./assets/sweater.png" width="60%" height="60%"> 
+        
+        <p>Light to no breeze</p>
+        `
+        $("wind").append(htmlwindImg);
+        }
+    }
 
 
     
