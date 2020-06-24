@@ -7,3 +7,24 @@ html{
     margin: 0px;
 
 }
+
+h1{
+    text-align: center;
+}
+
+.Output{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.temp, .sky, .wind{
+    margin: 0;
+}
+.temp, .sky {
+    width: calc(50% - 60px);
+    text-align: center;
+    border: 5px outset black;
+    margin: 25px;
+    background-color: lightgray;
+}
