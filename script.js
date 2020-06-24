@@ -8,12 +8,27 @@ var windSpeed =  0;
 var city = "";
 
 app.innit = () =>{
-    app.getWeather();
+    app.getCity();
 }
 
-app.getWeather = () =>{
+app.getCity = () => {
+    $("#submitCity").on('click', function(){
+        $(".city").empty();
+        $(".temp").empty();
+        $(".sky").empty();
+        $(".wind").empty();
+        city= $('#City').val()
+        console.log("You entered: ", city)
+
+        app.getWeather(city);
+        var infopage= document.querySelector('.start');
+        infopage.style.display="block";
+    })
+}
+
+app.getWeather = (city) =>{
     $.ajax({
-        url: 'http://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=8f8837d6ef6a877cc98b102507a41189',
+        url: 'http://api.openweathermap.org/data/2.5/weather?q=' +city+'&appid=8f8837d6ef6a877cc98b102507a41189',
         method: 'GET',
         dataType: 'json',
     }).then(Result => {
@@ -76,7 +91,7 @@ app.recommendations = () =>{
     else if (tempCFeels < -20 ){
         {var htmltempImg=`
         <img src="./assets/warning.png" width="60%" height="60%"> 
-        <div class="freeze>
+        <div class="freeze">
             <p>Warning! Absoultely Freezing Weather!</p>
         </div>
         `
@@ -86,7 +101,7 @@ app.recommendations = () =>{
     else if (tempCFeels > 30 ){
         {var htmltempImg=`
         <img src="./assets/warning.png" width="60%" height="60%"> 
-        <div class="heat>
+        <div class="heat">
             <p>Warning! Heat Stroke Weather!</p>
         </div>
         `
@@ -134,17 +149,35 @@ app.recommendations = () =>{
     `
     $(".sky").append(htmlSky);
 
+    console.log(windSpeed)
+
     if (windSpeed < 11){
         {var htmlwindImg=`
-        <img src="./assets/sweater.png" width="60%" height="60%"> 
+        <img src="./assets/wind.png" width="60%" height="60%"> 
         
         <p>Light to no breeze</p>
         `
-        $("wind").append(htmlwindImg);
+        $(".wind").append(htmlwindImg);
         }
     }
-
-
+    else if (windSpeed >= 11 &&  windSpeed < 20){
+        {var htmlwindImg=`
+        <img src="./assets/wind1.png" width="60%" height="60%"> 
+        
+        <p>Strong breeze!</p>
+        `
+        $(".wind").append(htmlwindImg);
+        }
+    }
+    else if (windSpeed > 20){
+        {var htmlwindImg=`
+        <img src="./assets/warning.png" width="60%" height="60%"> 
+        
+        <p>Warning! Gale to Hurricane!</p>
+        `
+        $(".wind").append(htmlwindImg);
+        }
+    }
     
 }
 
