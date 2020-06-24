@@ -1,0 +1,9 @@
+html{
+    background-image: linear-gradient(to bottom, #9CDFEF,  white);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: auto;
+    min-height: 100vh;
+    margin: 0px;
+
+}
